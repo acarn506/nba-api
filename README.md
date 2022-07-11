@@ -13,7 +13,7 @@
 - RapidApi: API-NBA
 [API Docs](https://rapidapi.com/api-sports/api/api-nba/details)
 
--RapidApi: NBA Latest News
+- RapidApi: NBA Latest News
 [API Docs](https://rapidapi.com/savey03/api/nba-latest-news/)
 
 - Data: Team Info, player stats, scores, news/articles
