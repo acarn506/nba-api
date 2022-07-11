@@ -22,5 +22,3 @@
 - Team page - fetch with Static Site Generator (SSG)
 - Specific team page - fetch with Server-Side Rendering (SSR) 
 
-
-
