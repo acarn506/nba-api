@@ -5,7 +5,6 @@ export default function Teams({ teams }) {
     console.log('TEAMS', teams)
     return (
         <>
-            <div>Teams</div>
             <SearchInput/>
             <TeamsTable teams={teams}/>
         </>
