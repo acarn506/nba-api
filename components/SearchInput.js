@@ -11,6 +11,7 @@ export default function SearchInput({ ...rest }) {
                 variant='filled'
                 size='large' 
                 color='warning'
+                {...rest}
                 
                InputProps={{
                     startAdornment: (
