@@ -1,20 +1,55 @@
+import { useState, useEffect, useRef } from 'react'
+import Select from '../../components/Select'
+import axios from "axios";
+
 export default function Team({ data }) {
     console.log(data)
+    const [teamStats, setTeamStats] = useState(data)
+    const [year, setYear] = useState('2021')
+    const isMounted = useRef(false)
+    const conference = teamStats.conference.name
 
-    const conference = data.conference.name
+
+    const handleYearChange = (e) => {
+        e.preventDefault()
+        setYear(e.target.value)
+    }
+
+    useEffect( () => {
+
+        if (isMounted.current) {
+            const options = {
+                method: 'GET',
+                url: 'http://localhost:8000/stats',
+                params: {id : teamStats.team.id, year : year}
+            }
+    
+            axios.request(options).then((response) => {
+                console.log('New Data', response.data.response[0])
+                setTeamStats(response.data.response[0])
+            }).catch((err) => console.log(err))
+        } else {
+            isMounted.current = true
+        }
+       
+    }, [year])
+
+
 
     return (
         <div className="bg-theme-blue-medium">
-            <div className="flex flex-col content-center items-center p-8">
+            <div className="flex flex-col content-center items-center pt-8">
                 <img
-                    src={data.team.logo}
-                    alt={`${data.team.name} Logo`}
+                    src={teamStats.team.logo}
+                    alt={`${teamStats.team.name} Logo`}
                     width={450}
                     height={450}
                 />
-                <h1 className="text-3xl mt-8 text-white ">{data.team.name}</h1>
+                <h1 className="text-3xl mt-8 text-white ">{teamStats.team.name}</h1>
                 <div className="text-lg text-white my-4">Conference: {conference.charAt(0).toUpperCase() + conference.slice(1)}</div>
             </div>
+            <Select onChange={handleYearChange}/>
+            <div> Season {teamStats.season}</div>
         </div>
     )
 }
@@ -37,4 +72,4 @@ export async function getServerSideProps({ params }) {
   
     // Pass team to the page via props
     return { props: { data } }
-  }
+}

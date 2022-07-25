@@ -19,7 +19,7 @@ export default function Teams({ teams }) {
     }
 
     return (
-        <div className="">
+        <div>
             <SearchInput onChange={onChangeInput}/>
             <TeamsTable teams={filteredTeams}/>
         </div>
