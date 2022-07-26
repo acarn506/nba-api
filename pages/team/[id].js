@@ -6,7 +6,7 @@ export default function Team({ data }) {
     console.log(data)
     const [teamStats, setTeamStats] = useState(data)
     const [year, setYear] = useState('2021')
-    const isMounted = useRef(false)
+    // const isMounted = useRef(false)
     const conference = teamStats.conference.name
 
 
@@ -15,7 +15,7 @@ export default function Team({ data }) {
         setYear(e.target.value)
     }
 
-    useEffect( () => {
+    /* useEffect( () => {
 
         if (isMounted.current) {
             const options = {
@@ -32,24 +32,45 @@ export default function Team({ data }) {
             isMounted.current = true
         }
        
-    }, [year])
-
+    }, [year]) */
 
 
     return (
-        <div className="bg-theme-blue-medium">
-            <div className="flex flex-col content-center items-center pt-8">
+        <div className="bg-theme-blue-medium flex">
+            <div className="flex flex-col content-center items-center pt-8 flex-1">
                 <img
-                    src={teamStats.team.logo}
-                    alt={`${teamStats.team.name} Logo`}
-                    width={450}
-                    height={450}
+                        src={teamStats.team.logo}
+                        alt={`${teamStats.team.name} Logo`}
+                        width={375}
+                        height={375}
                 />
                 <h1 className="text-3xl mt-8 text-white ">{teamStats.team.name}</h1>
                 <div className="text-lg text-white my-4">Conference: {conference.charAt(0).toUpperCase() + conference.slice(1)}</div>
             </div>
-            <Select onChange={handleYearChange}/>
-            <div> Season {teamStats.season}</div>
+
+
+            <div className='flex flex-col content-center items-center pt-8 flex-1'>
+                <Select onChange={handleYearChange}/>
+                <div className='bg-theme-white p-8'>
+                    <div>Season {teamStats.season}</div>
+                    <div>Conferenece Rank: {teamStats.conference.rank}</div>
+                    <div className='flex content-between gap-x-3'> 
+                        <h1>Wins</h1>
+                        <div>Home {teamStats.win.home}</div>
+                        <div>Away {teamStats.win.away}</div>
+                        <div>Total {teamStats.win.total}</div>
+                    </div>
+                    <div className='flex content-around gap-x-3'> 
+                        <h1>Losses</h1>
+                        <div>Home {teamStats.loss.home}</div>
+                        <div>Away {teamStats.loss.away}</div>
+                        <div>Total {teamStats.loss.total}</div>
+                    </div>
+                </div>
+
+            </div>
+            
+            
         </div>
     )
 }
