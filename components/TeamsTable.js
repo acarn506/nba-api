@@ -33,7 +33,7 @@ export default function TeamsTable({ teams }) {
             </div>
             { orderedTeams.length > 0 ? orderedTeams.map((team, i) => (
                 <Link key={i} className='' href={`team/${team.id}`}>
-                    <div  className='flex p-5 text-center bg-theme-grey-light rounded-md mb-4 items-center ease-in-out duration-200 hover:-translate-y-1 hover:shadow-md'>
+                    <div  className='flex p-5 text-center bg-theme-grey-light rounded-md mb-4 items-center ease-in-out duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer'>
                         <div className="flex-1 text-left">{team.name}</div>
                         <div className="flex-1">{team.city}</div>
                         <div className="flex-1">{team.code}</div>

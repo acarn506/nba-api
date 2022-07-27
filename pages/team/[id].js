@@ -41,30 +41,30 @@ export default function Team({ data }) {
                 <img
                         src={teamStats.team.logo}
                         alt={`${teamStats.team.name} Logo`}
-                        width={375}
-                        height={375}
+                        width={325}
+                        height={325}
                 />
                 <h1 className="text-3xl mt-8 text-white ">{teamStats.team.name}</h1>
-                <div className="text-lg text-white my-4">Conference: {conference.charAt(0).toUpperCase() + conference.slice(1)}</div>
+                <div className="text-lg text-white my-4 mb-8">Conference: {conference.charAt(0).toUpperCase() + conference.slice(1)}</div>
             </div>
 
 
             <div className='flex flex-col content-center items-center pt-8 flex-1'>
-                <Select onChange={handleYearChange}/>
-                <div className='bg-theme-white p-8'>
+                <Select className='' onChange={handleYearChange}/>
+                <div className='bg-theme-white p-8 mt-8 flex flex-col items-center gap-y-3 border-2 border-theme-grey-dark rounded-md'>
                     <div>Season {teamStats.season}</div>
                     <div>Conferenece Rank: {teamStats.conference.rank}</div>
-                    <div className='flex content-between gap-x-3'> 
-                        <h1>Wins</h1>
-                        <div>Home {teamStats.win.home}</div>
-                        <div>Away {teamStats.win.away}</div>
-                        <div>Total {teamStats.win.total}</div>
+                    <div className='flex content-between gap-x-3 p-2'> 
+                        <h1 className='text-green-600 font-medium'>Wins</h1>
+                        <div>Home: {teamStats.win.home}</div>
+                        <div>Away: {teamStats.win.away}</div>
+                        <div className='font-bold'>Total: {teamStats.win.total}</div>
                     </div>
-                    <div className='flex content-around gap-x-3'> 
-                        <h1>Losses</h1>
-                        <div>Home {teamStats.loss.home}</div>
-                        <div>Away {teamStats.loss.away}</div>
-                        <div>Total {teamStats.loss.total}</div>
+                    <div className='flex content-around gap-x-3 p-2'> 
+                        <h1 className='text-red-500 font-medium'>Losses</h1>
+                        <div>Home: {teamStats.loss.home}</div>
+                        <div>Away: {teamStats.loss.away}</div>
+                        <div className='font-bold'>Total: {teamStats.loss.total}</div>
                     </div>
                 </div>
 
