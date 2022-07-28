@@ -6,11 +6,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function BasicSelect({...rest}) {
-  const [year, setYear] = useState('2021');
-
-  const handleChange = (event) => {
-    setYear(event.target.value);
-  };
 
   return (
     <div className='flex justify-center'>
@@ -21,9 +16,7 @@ export default function BasicSelect({...rest}) {
                 <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={year}
-                label="2021"
-                onChange={handleChange}
+                label="Year"
                 {...rest}
                 >
                 <MenuItem value={2021}>2021</MenuItem>

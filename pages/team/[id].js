@@ -1,39 +1,25 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import Select from '../../components/Select'
-import axios from "axios";
 
-export default function Team({ data }) {
-    console.log(data)
-    const [teamStats, setTeamStats] = useState(data)
+export default function Team({ data21, data20, data19 }) {
+    const [teamStats, setTeamStats] = useState(data21)
     const [year, setYear] = useState('2021')
-    // const isMounted = useRef(false)
     const conference = teamStats.conference.name
 
+    console.log('TEAM DATA', teamStats)
 
     const handleYearChange = (e) => {
         e.preventDefault()
         setYear(e.target.value)
-    }
 
-    /* useEffect( () => {
-
-        if (isMounted.current) {
-            const options = {
-                method: 'GET',
-                url: 'http://localhost:8000/stats',
-                params: {id : teamStats.team.id, year : year}
-            }
-    
-            axios.request(options).then((response) => {
-                console.log('New Data', response.data.response[0])
-                setTeamStats(response.data.response[0])
-            }).catch((err) => console.log(err))
+        if (e.target.value === 2020) {
+            setTeamStats(data20)
+        } else if (e.target.value === 2019) {
+            setTeamStats(data19)
         } else {
-            isMounted.current = true
+            setTeamStats(data21)
         }
-       
-    }, [year]) */
-
+    }
 
     return (
         <div className="bg-theme-blue-medium flex">
@@ -44,13 +30,13 @@ export default function Team({ data }) {
                         width={325}
                         height={325}
                 />
-                <h1 className="text-3xl mt-8 text-white ">{teamStats.team.name}</h1>
-                <div className="text-lg text-white my-4 mb-8">Conference: {conference.charAt(0).toUpperCase() + conference.slice(1)}</div>
+                <h1 className="text-3xl mt-8 text-theme-black ">{teamStats.team.name}</h1>
+                <div className="text-lg text-theme-black my-4 mb-8">Conference: {conference.charAt(0).toUpperCase() + conference.slice(1)}</div>
             </div>
 
 
             <div className='flex flex-col content-center items-center pt-8 flex-1'>
-                <Select className='' onChange={handleYearChange}/>
+                <Select value={year} onChange={handleYearChange}/>
                 <div className='bg-theme-white p-8 mt-8 flex flex-col items-center gap-y-3 border-2 border-theme-grey-dark rounded-md'>
                     <div>Season {teamStats.season}</div>
                     <div>Conferenece Rank: {teamStats.conference.rank}</div>
@@ -86,11 +72,17 @@ export async function getServerSideProps({ params }) {
     }; 
 
     // Fetch team from external API
-    const res = await fetch(`https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2021&team=${params.id}`, options)
-    let data = await res.json()
+    const URL21 = `https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2021&team=${params.id}`
+    const URL20 = `https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2020&team=${params.id}`
+    const URL19 =`https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2019&team=${params.id}`
 
-    data = data.response[0]
+    const [res21, res20, res19] = await Promise.all([fetch(URL21, options), fetch(URL20, options), fetch(URL19, options)])
+    let [data21, data20, data19] = await Promise.all([res21.json(), res20.json(), res19.json()])
+
+    data21 = data21.response[0]
+    data20 = data20.response[0]
+    data19 = data19.response[0]
   
     // Pass team to the page via props
-    return { props: { data } }
+    return { props: { data21, data20, data19 } }
 }
