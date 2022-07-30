@@ -15,9 +15,9 @@ export default function Navbar() {
              height={150}
             />
             <ul className='flex items-center space-x-6'>
-            <li className={router.pathname == '/' ? 'cursor-none' : 'bg-red-700'}>
+            <li className={router.pathname == '/' ? 'pointer-events-none text-slate-300' : ''}>
                     <Link href="/">
-                        <a>Home</a>
+                        <a className=''>Home</a>
                     </Link>
                 </li>
                 <li>

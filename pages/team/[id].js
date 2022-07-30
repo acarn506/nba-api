@@ -35,7 +35,7 @@ export default function Team({ data21, data20, data19 }) {
             </div>
 
 
-            <div className='flex flex-col content-center items-center pt-8 flex-1'>
+            <div className='flex flex-col content-center items-center py-8  flex-1'>
                 <Select value={year} onChange={handleYearChange}/>
                 <div className='bg-theme-white p-8 mt-8 flex flex-col items-center gap-y-3 border-2 border-theme-grey-dark rounded-md'>
                     <div>Season {teamStats.season}</div>
