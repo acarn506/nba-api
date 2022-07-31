@@ -26,11 +26,6 @@ export default function Navbar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/players">
-                        <a>Players</a>
-                    </Link>
-                </li>
-                <li>
                     <Link href="/scores">
                         <a>Scores</a>
                     </Link>
