@@ -2,7 +2,16 @@ export default function Players({ players }) {
 
     console.log('PLAYERS DATA', players)
     return (
-        <div>Players</div>
+        <div className="grid bg-theme-blue-light row-auto grid-cols-4">
+            {
+                players.map( (player, i) => (
+                    <div key={i} className='p-2 border-2 border-theme-grey-medium rounded-md text-white'>
+                        <h1>{player.firstname + " " + player.lastname}</h1>
+                        <div>Height: {player.height.feets + "'" + player.height.inches}</div>
+                    </div>
+                ))
+            }
+        </div>
     )
 }
 
