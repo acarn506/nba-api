@@ -1,5 +1,6 @@
 import Image from "next/image"
-import {KeyboardArrowDownRounded, KeyboardArrowUpRounded} from '@mui/icons-material'
+import { orderBy } from "../util/helperfunctions"
+import ArrowPostion from "./ArrowPosition"
 import { useState } from "react"
 import Link from "next/link"
 
@@ -31,7 +32,6 @@ export default function TeamsTable({ teams }) {
                 <div className="flex-1 font-bold">Abbreviation</div>
                 <div className="w-16 h-16"></div>
                 <div className="flex-1 font-bold">Team & Player Info</div>
-                
             </div>
             { orderedTeams.length > 0 ? orderedTeams.map((team, i) => (
                     <div  key={i} className='flex p-5 text-center bg-theme-grey-light rounded-md mb-4 items-center ease-in-out duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer'>
@@ -61,26 +61,3 @@ export default function TeamsTable({ teams }) {
     )
 }
 
-function orderBy( teams, direction) {
-    if (direction === 'asc') {
-        return [...teams].sort( (a, b) => (a.name > b.name ? 1 : -1))
-    }
-
-    if (direction === 'desc') {
-        return [...teams].sort( (a, b) => (a.name > b.name ? -1 : 1))
-    }
-
-    return teams
-}
-
-function ArrowPostion({ direction }) {
-    if (!direction) {
-        return <></>
-    }
-
-    if (direction === 'desc') {
-        return <KeyboardArrowDownRounded className="text-theme-blue-medium"/>
-    } else {
-        return <KeyboardArrowUpRounded className="text-theme-blue-medium"/>
-    }
-}
